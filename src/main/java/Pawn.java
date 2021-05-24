@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Pawn {
     private PawnColor color;
@@ -71,4 +72,16 @@ public class Pawn {
         pawnList.remove(0);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pawn pawn = (Pawn) o;
+        return isQueen == pawn.isQueen && color == pawn.color && Objects.equals(pawnList, pawn.pawnList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(color, isQueen, pawnList);
+    }
 }

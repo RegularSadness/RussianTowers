@@ -12,6 +12,8 @@ public class Field {
         return currentMoveColor;
     }
 
+
+
     public int getBlackPawnCounter() {
         return blackPawnCounter;
     }
@@ -75,11 +77,11 @@ public class Field {
         }
         Pawn pawn = getValue(from);
         PawnColor color = pawn.getColor();
-        if (color != currentMoveColor && !(isOccupiedByValue(to, getOpponentValue(color)) && (lastPawnMove == pawn))) {
-            throw new RuntimeException("Move of opposite team");
-        }
         if (!isCorrectMove(from, to, pawn)) {
             throw new RuntimeException("Move is invalid");
+        }
+        if (color != currentMoveColor && !(isOccupiedByValue(to, getOpponentValue(color)) && (lastPawnMove == pawn))) {
+            throw new RuntimeException("Move of opposite team");
         }
         if (isOccupiedByValue(to, getOpponentValue(color))) {
             Position positionAfterCut = getPositionAfterTo(from, to);
@@ -93,7 +95,6 @@ public class Field {
                     checkAndSetQueen(positionAfterCut, pawn);
                     pawn.addPawn(oppositePawn);
                 } else {
-
                     setValue(from, EMPTY_VALUE);
                     setValue(positionAfterCut, pawn);
                     checkAndSetQueen(positionAfterCut, pawn);
